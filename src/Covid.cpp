@@ -18,25 +18,24 @@ void Covid::loadDoc(){
             isInfected = true;
         }
     
-        this->individus.push_back(std::make_unique<individue>(individue(line1, isInfected)));
+        this->individus.push_back(std::make_unique<Individu>(Individu(line1, isInfected)));
     }
     myfileIndividu.close();
 
     myfileContact.open("src/Contacts.txt", std::ios::in);
     
     while(myfileContact.peek() != EOF){
-        getline(myfileContact, line1, ' ');
+        myfileContact >> line1;
         float dist;
         myfileContact >> dist;
-        getline(myfileContact, line2);
-        std::cout << dist << std::endl;
-        
+        myfileContact >> line2;
+
         this->contacts.push_back(std::make_unique<Contact>(Contact(line1, line2, dist)));
     }
     myfileContact.close();
 }
 
-individue* Covid::getIndividus(int index){
+Individu* Covid::getIndividus(int index){
     return this->individus.at(index).get();
 }
 

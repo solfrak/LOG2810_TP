@@ -1,4 +1,4 @@
-#include "individue.h"
+#include "Individu.h"
 #include "Contact.h"
 #include <vector>
 #include <memory>
@@ -7,9 +7,9 @@ class Covid
 private:
 public:
     void loadDoc();
-    std::vector<std::unique_ptr<individue>> individus;
+    std::vector<std::unique_ptr<Individu>> individus;
     std::vector<std::unique_ptr<Contact>> contacts;
-    individue* getIndividus(int index);
+    Individu* getIndividus(int index);
     Contact* getContact(int index);
     void creerGrapheExposition();
     void afficherGrapheExposition();

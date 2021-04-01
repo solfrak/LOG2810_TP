@@ -7,7 +7,9 @@ int main()
 {
     Covid test;
     test.loadDoc();
-    for(int i =0; i < test.contacts.size(); i++){
-        std::cout<< test.getContact(i)->print();
+    std::cout << test.contacts.size() << std::endl;
+     for(auto& it : test.contacts){
+       it->print();
     }
+ 
 }

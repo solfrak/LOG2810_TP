@@ -1,12 +1,12 @@
 #include <string>
 #include <vector>
-class individue
+class Individu
 {
 private:
     bool isInfected_;
     std::string name_;
 public:
-    individue(std::string, bool);
+    Individu(std::string, bool);
     std::string getName(){
         return name_;
     }
