@@ -1,10 +1,13 @@
-// Your First C++ Program
-
 #include <iostream>
-#include "test.h"
+#include <bits/stdc++.h>
+#include "Covid.h"
+using namespace std;
 
-int main() {
-    std::cout << "Hello World!";
-    test montest =  test();
-    return 0;
+int main() 
+{
+    Covid test;
+    test.loadDoc();
+    for(int i =0; i < test.contacts.size(); i++){
+        std::cout<< test.getContact(i)->print();
+    }
 }
