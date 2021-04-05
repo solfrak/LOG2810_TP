@@ -1,11 +1,14 @@
+#pragma once
 #include <string>
+#include "Individu.h"
 class Contact
 {
 private:
 public:
-    Contact(std::string, std::string, float);
+    Contact(Individu*, Individu*, float);
     void print();
-    std::string name1_, name2_;
+    
+    Individu* name1_, * name2_;
     float distance_;
 };
 
