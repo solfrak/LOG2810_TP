@@ -1,33 +1,13 @@
+#pragma once
 #include <iostream>
-#include <bits/stdc++.h>
-#include <climits>
+#include <string>
 #include "Covid.h"
-#include <vector>
-#include "Jeu.h"
-#define INFINITY 9999
+#
+
+
 using namespace std;
 
-//  void CreerGraphe(){
-// 	 t.creerGrapheExposition;
-//  }
-//  void AfficherGraphe(){
-// 	 t.afficherGrapheExposition;
-//  }
-//  AfficherNotification(){
-// 	 t.
-//  }
-
-
-Covid t;
-
-void MenuJeuInstructif()
-{
-	Jeu test;
-	test.creerAutomate();
-}
-
-
-void MenuAlerteCovid()
+void MenuAlerteCovid(Covid t)
 {	
 	bool menuCovid = true;
 	bool hasCreateExposition = false;
@@ -74,34 +54,5 @@ void MenuAlerteCovid()
 			break;
 		}
 	
-	}
-}
-
-int main()
-{
-	while (true)
-	{
-		cout << "\n\nAppuyer sur:\n(a): Alerte COVID.\n(b): Jeu Intructif.\n(c): Quitter.\n";
-		char input = 'b';
-		//cin >> input;
-
-		switch (input)
-		{
-		case 'a':
-			MenuAlerteCovid();
-			break;
-
-		case 'b':
-			MenuJeuInstructif();
-			break;
-
-		case 'c':
-			return 0;
-			break;
-
-		default:
-			cout << "Entre invalide!\n";
-			break;
-		}
 	}
 }
