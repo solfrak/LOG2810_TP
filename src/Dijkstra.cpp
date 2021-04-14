@@ -1,5 +1,5 @@
 #include "Dijkstra.h"
-#define INFINITY 999
+#define INFINITY 9999
 void Dijkstra::foundDistance(int n, int startnode, vector<vector<double>> G){
     double cost[n][n];
 	double distance[n];

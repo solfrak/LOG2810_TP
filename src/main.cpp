@@ -3,85 +3,103 @@
 #include <climits>
 #include "Covid.h"
 #include <vector>
-#include "Dijkstra.h"
+
 #define INFINITY 9999
 using namespace std;
 
+//  void CreerGraphe(){
+// 	 t.creerGrapheExposition;
+//  }
+//  void AfficherGraphe(){
+// 	 t.afficherGrapheExposition;
+//  }
+//  AfficherNotification(){
+// 	 t.
+//  }
+
+
 Covid t;
-// std::vector<double> myDistance;
 
-// void dijkstra(int n,int startnode, std::vector<std::vector<double>> G)
-// {
-	
-// 	double cost[t.graph.size()][t.graph.size()];
-// 	double distance[t.graph.size()];
-// 	int pred[t.graph.size()];
-// 	int visited[t.graph.size()],count;
-// 	double mindistance;
-// 	int nextnode,i,j;
-	
-// 	//pred[] stores the predecessor of each node
-// 	//count gives the number of nodes seen so far
-// 	//create the cost matrix
-// 	for(i=0;i<n;i++)
-// 		for(j=0;j<n;j++)
-// 			if(G[i][j]==0)
-// 				cost[i][j]=INFINITY;
-// 			else
-// 				cost[i][j]=G[i][j];
-	
-// 	//initialize pred[],distance[] and visited[]
-// 	for(i=0;i<n;i++)
-// 	{
-// 		distance[i]=cost[startnode][i];
-// 		pred[i]=startnode;
-// 		visited[i]=0;
-// 	}
-	
-// 	distance[startnode]=0.0;
-// 	visited[startnode]=1;
-// 	count=1;
-	
-// 	while(count<n-1)
-// 	{
-// 		mindistance=INFINITY;
-		
-// 		//nextnode gives the node at minimum distance
-// 		for(i=0;i<n;i++)
-// 			if(distance[i]<mindistance&&!visited[i])
-// 			{
-// 				mindistance=distance[i];
-// 				nextnode=i;
-// 			}
-			
-// 			//check if a better path exists through nextnode			
-// 			visited[nextnode]=1;
-// 			for(i=0;i<n;i++)
-// 				if(!visited[i])
-// 					if(mindistance+cost[nextnode][i]<distance[i])
-// 					{
-// 						distance[i]=mindistance+cost[nextnode][i];
-// 						pred[i]=nextnode;
-// 					}
-// 		count++;
-// 	}
-// 	for(int i=0; i < t.graph.size(); i++){
-// 		myDistance.push_back(distance[i]);
-// 	}
-// }
-
-int main() 
+void MenuJeuInstructif()
 {
-	t.loadDoc();
-	t.loadGraph();
-	Dijkstra d;
+}
+
+
+void MenuAlerteCovid()
+{	
+	bool menuCovid = true;
+	bool hasCreateExposition = false;
+	while(menuCovid){
+		char option;
+		cout << "\n\n(a) Creer le graphe d’exposition.\n" << "(b) Afficher le graphe d’exposition.\n" << "(c) Afficher notification COVID\n" << "(d) Quitter.\n";
+		cin >> option;
+
+		switch (option)
+		{
+		case 'a':
+			hasCreateExposition = t.creerGrapheExposition();
+			break;
+
+		case 'b':
+			if(hasCreateExposition){
+				t.afficherGrapheExposition();
+			}
+			else{
+				cout << "Vous n'avez pas creer de graphe. Veuillez selectionner l'option (a) en premier\n";
+			}
+			break;
+			
+		case 'c':
+			if(hasCreateExposition){
+				cout << "Entrer le nom valide d'un indidu\n";
+				std::string nom;
+				cin >> nom;
+				if(t.NotifierExposition(nom)){
+					cout << "Vous avez ete exposer au cours des 14 derniers jours\n";
+				}
+				else {
+					cout << "\nAucune exposition detectee\n";
+				}
+			}
+
+			break;
+		case 'd':
+			menuCovid = false;
+			break;
+		
+		default:
+			cout << "Entre invalide!\n";
+			break;
+		}
 	
-	d.foundDistance(t.graph.size(), t.findIndexIndividu("Clorise"), t.graph);
-	for(int i=0; i < d.myDistance.size(); i++){
-		if(d.myDistance[i] <= 2 && t.getIndividus(i)->getIsInfected()){
-			std::cout << "a été exposé"<< endl;
+	}
+}
+
+int main()
+{
+	while (true)
+	{
+		cout << "\n\nAppuyer sur:\n(a): Alerte COVID.\n(b): Jeu Intructif.\n(c): Quitter.\n";
+		char input;
+		cin >> input;
+
+		switch (input)
+		{
+		case 'a':
+			MenuAlerteCovid();
+			break;
+
+		case 'b':
+			MenuJeuInstructif();
+			break;
+
+		case 'c':
+			return 0;
+			break;
+
+		default:
+			cout << "Entre invalide!\n";
 			break;
 		}
 	}
-	cout << "n'a pas été exposé" << endl;
 }

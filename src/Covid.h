@@ -3,12 +3,14 @@
 #include "Contact.h"
 #include <vector>
 #include <memory>
+#include "Dijkstra.h"
+
 class Covid
 {
 private:
     Individu* findIndividu(std::string);
+    Dijkstra d;
 public:
-    void loadDoc();
     std::vector<std::vector<double>> graph;
     std::vector<std::unique_ptr<Individu>> individus;
     std::vector<std::unique_ptr<Contact>> contacts;
@@ -16,9 +18,10 @@ public:
     Individu* getIndividus(int index);
     Contact* getContact(int index);
     int findIndexIndividu(std::string name);
-    void creerGrapheExposition();
+    bool creerGrapheExposition();
     void afficherGrapheExposition();
     void loadGraph();
+    bool loadDoc(std::string ind, std::string cont);
     // void IdentifierExposition();
-    // void NotifierExposition();
+    bool NotifierExposition(std::string);
 };
