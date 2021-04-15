@@ -107580,17 +107580,20 @@ class state
 private:
     std::string etat_;
     char transition_;
-    std::vector<std::unique_ptr<state>> listConnection;
     int NbRecherches = 0;
+    int nbTransition=0;
 
 public:
+    std::vector<std::unique_ptr<state>> listConnection;
     bool estFinal_;
     state(std::string, char, bool);
-    std::string print();
-    void ajouter(std::string, char, bool);
+    void print();
+    state* ajouter(std::string, char, bool);
     void increment();
     state* getNextState(char);
+    std::string getEtat();
     char getTransition();
+
 };
 # 3 "/home/samuel/LOG2810_TP/src/Jeu.h" 2
 
@@ -107606,6 +107609,7 @@ public:
 
     void creerAutomate();
     void createState(std::string);
+    void saisirMot();
 
 };
 # 7 "/home/samuel/LOG2810_TP/src/main.cpp" 2
@@ -107616,8 +107620,33 @@ Covid t;
 
 void MenuJeuInstructif()
 {
- Jeu test;
- test.creerAutomate();
+ Jeu monjeu;
+ bool menuJeu = true;
+ while(menuJeu){
+  char option;
+  cout << "\n\n(a) Creer Automate.\n" << "(b) Saisir mot.\n" << "(c) Afficher statistique\n" << "(d) Quitter.\n";
+  cin >> option;
+  switch(option){
+  case 'a':
+   monjeu.creerAutomate();
+   break;
+
+  case 'b':
+   monjeu.saisirMot();
+   break;
+
+  case 'c':
+
+   break;
+  case 'd':
+   menuJeu = false;
+   break;
+
+  default:
+   cout << "Entre invalide!\n";
+   break;
+  }
+ }
 }
 
 
@@ -107676,8 +107705,8 @@ int main()
  while (true)
  {
   cout << "\n\nAppuyer sur:\n(a): Alerte COVID.\n(b): Jeu Intructif.\n(c): Quitter.\n";
-  char input;
-
+  char input = 'b';
+  cin >> input;
 
   switch (input)
   {

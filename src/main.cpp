@@ -22,8 +22,33 @@ Covid t;
 
 void MenuJeuInstructif()
 {
-	Jeu test;
-	test.creerAutomate();
+	Jeu monjeu;
+	bool menuJeu = true;
+	while(menuJeu){
+		char option;
+		cout << "\n\n(a) Creer Automate.\n" << "(b) Saisir mot.\n" << "(c) Afficher statistique\n" << "(d) Quitter.\n";
+		cin >> option;
+		switch(option){
+		case 'a':
+			monjeu.creerAutomate();
+			break;
+
+		case 'b':
+			monjeu.saisirMot();
+			break;
+			
+		case 'c':
+
+			break;
+		case 'd':
+			menuJeu = false;
+			break;
+		
+		default:
+			cout << "Entre invalide!\n";
+			break;
+		}
+	}
 }
 
 
@@ -83,7 +108,7 @@ int main()
 	{
 		cout << "\n\nAppuyer sur:\n(a): Alerte COVID.\n(b): Jeu Intructif.\n(c): Quitter.\n";
 		char input = 'b';
-		//cin >> input;
+		cin >> input;
 
 		switch (input)
 		{

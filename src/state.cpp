@@ -1,26 +1,25 @@
 #include "state.h"
+#include <iostream>
 
 state::state(std::string etat, char transition, bool estFinal) : etat_(etat), transition_(transition), estFinal_(estFinal)
 {
 
 }
 
-std::string state::print()
+void state::print()
 {
-    // for (auto it : listConnection)
-    // {
-    //     if (!it->estFinal_)
-    //     {
-    //         return it->print();
-    //     }
-    //     else
-    //     {
-    //         return etat_; //ou etat
-    //     }      
-    // }
-    for(int i=0; i < listConnection.size(); i++){
-        state* test = listConnection.at(i).get();
+    if(this->estFinal_){
+        std::cout << this->getEtat() << std::endl;
     }
+    else{
+        for(auto& it : listConnection){
+            it->print();
+        }
+    }
+}
+
+std::string state::getEtat(){
+    return etat_;
 }
 
 void state::increment()
@@ -49,6 +48,21 @@ char state::getTransition(){
     return transition_;
 }
 
-void state::ajouter(std::string etat, char c, bool bb){
+state* state::ajouter(std::string etat, char c, bool bb){
     listConnection.push_back(std::make_unique<state>(etat,c,bb));
+    return listConnection.back().get();
 }
+
+
+// int state::getNbTransition(){
+//     if(listConnection.size() == 0 && estFinal_){
+//         return 0;
+//     }
+//     else{
+//         int nb;
+//         for(auto& it : listConnection){
+//             nb += it->getNbTransition();
+//         }
+//         return nb;
+//     }
+// }
