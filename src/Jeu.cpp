@@ -60,6 +60,7 @@ void Jeu::createState(std::string word)
 void Jeu::saisirMot(){
     bool motTrouv = false;
     state* currentState = stateStart.get();
+    currentState->updateNbWord();
     while(!motTrouv){
         std::cout << "Entrer une lettre\n";
 
@@ -67,18 +68,21 @@ void Jeu::saisirMot(){
         std::cin >> input;
         currentState = currentState->getNextState(input);
         
-        if(currentState->listConnection.size() == 1){
+
+        if(currentState->nbWord == 1){
             std::cout << "Le mot que vous chercez est: ";
             currentState->print();
             motTrouv = true;
-
+            
             while(!currentState->estFinal_){
                 currentState = currentState->listConnection.at(0).get();
             }
-            currentState->getTransition();
+            currentState->increment();
         }
         else{
             currentState->print();
         }
     }
 }
+
+

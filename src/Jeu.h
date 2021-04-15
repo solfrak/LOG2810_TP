@@ -14,6 +14,7 @@ public:
     void creerAutomate();
     void createState(std::string);
     void saisirMot();
+    void updateNbWord();
 
 };
 

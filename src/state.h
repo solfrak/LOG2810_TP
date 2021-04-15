@@ -9,9 +9,9 @@ private:
     std::string etat_;
     char transition_;
     int NbRecherches = 0;
-    int nbTransition=0;
     
 public:
+    int nbWord = 0;
     std::vector<std::unique_ptr<state>> listConnection;
     bool estFinal_;
     state(std::string, char,  bool);
@@ -21,5 +21,5 @@ public:
     state* getNextState(char);
     std::string getEtat();
     char getTransition();
-    //int getNbTransition();
+    int updateNbWord();
 };

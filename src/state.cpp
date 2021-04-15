@@ -54,15 +54,20 @@ state* state::ajouter(std::string etat, char c, bool bb){
 }
 
 
-// int state::getNbTransition(){
-//     if(listConnection.size() == 0 && estFinal_){
-//         return 0;
-//     }
-//     else{
-//         int nb;
-//         for(auto& it : listConnection){
-//             nb += it->getNbTransition();
-//         }
-//         return nb;
-//     }
-// }
+int state::updateNbWord(){
+    if(estFinal_){
+        if(listConnection.size() == 0){
+            nbWord +=1;
+            return nbWord;
+        }
+        else{
+            nbWord+=1;
+        }
+
+    }
+
+    for(auto& it : listConnection){
+        nbWord += it->updateNbWord();
+    }
+    return nbWord;
+}
