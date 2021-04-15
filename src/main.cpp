@@ -38,7 +38,7 @@ void MenuJeuInstructif()
 			break;
 			
 		case 'c':
-
+			monjeu.afficherStatistique();
 			break;
 		case 'd':
 			menuJeu = false;

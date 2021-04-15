@@ -71,3 +71,4 @@ int state::updateNbWord(){
     }
     return nbWord;
 }
+

@@ -1,5 +1,6 @@
 #include "Jeu.h"
 #include <cstring>
+#include <algorithm>
 void Jeu::creerAutomate()
 {
     std::cout << "Entrer le nom du lexique\n";
@@ -13,6 +14,8 @@ void Jeu::creerAutomate()
         lexique >> line;
         createState(line);
     }
+
+    stateStart.get()->updateNbWord();
 }
 
 void Jeu::createState(std::string word)
@@ -60,7 +63,7 @@ void Jeu::createState(std::string word)
 void Jeu::saisirMot(){
     bool motTrouv = false;
     state* currentState = stateStart.get();
-    currentState->updateNbWord();
+    
     while(!motTrouv){
         std::cout << "Entrer une lettre\n";
 
@@ -78,6 +81,10 @@ void Jeu::saisirMot(){
                 currentState = currentState->listConnection.at(0).get();
             }
             currentState->increment();
+            ajouteTop(currentState);
+            updateTop();
+            
+            
         }
         else{
             currentState->print();
@@ -86,3 +93,35 @@ void Jeu::saisirMot(){
 }
 
 
+void Jeu::afficherStatistique(){
+    
+    std::cout << "\nLes 10 mots les plus recherche sont:\n";
+    for(int i =0; i < myTop.size() && i < 10; i++){
+        std::cout << myTop.at(i)->etat_ << std::endl;
+    }
+    
+}
+
+void Jeu::ajouteTop(state* s){
+    for(auto& it : myTop){
+        if(it->etat_ == s->etat_){
+            return;
+        }
+    }
+    myTop.push_back(s);
+}
+
+void Jeu::updateTop(){
+    std::sort(myTop.begin(), myTop.end(), [](const auto* o1, const auto o2){
+        return o1->NbRecherches > o2->NbRecherches;
+    });
+    for(int i =0; i < myTop.size(); i++){
+        if(i < 10){
+            myTop.at(i)->estTop10 = true;
+        }
+        else{
+            myTop.at(i)->estTop10 = false;
+        }
+    }
+
+}
