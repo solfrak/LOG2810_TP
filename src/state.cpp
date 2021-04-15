@@ -1,9 +1,9 @@
 #include "state.h"
 #include <iostream>
 
+
 state::state(std::string etat, char transition, bool estFinal) : etat_(etat), transition_(transition), estFinal_(estFinal)
 {
-
 }
 
 void state::print()
@@ -29,12 +29,7 @@ void state::increment()
 
 state* state::getNextState(char c)
 {
-    // for (auto it : listConnection)
-    // {
-    //     if(it->getTransition() == c){
-    //         return it.get();
-    //     }
-    // }
+  
     for(int i=0; i < listConnection.size(); i++){
         state* test = listConnection.at(i).get();
         if(test->getTransition() == c){

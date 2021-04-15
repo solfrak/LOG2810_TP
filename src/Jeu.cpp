@@ -18,6 +18,7 @@ void Jeu::creerAutomate()
     stateStart.get()->updateNbWord();
 }
 
+
 void Jeu::createState(std::string word)
 {
     char letter;
@@ -26,10 +27,10 @@ void Jeu::createState(std::string word)
     for (int i = 0; i < word.length(); i++)
     {
         letter = word[i];
-        if(letter < 0){
-            i++;
-            letter = word[i];
-        }
+        // if(letter < 0){
+        //     i++;
+        //     letter = word[i];
+        // }
         if(i != word.length()-1)
         {
             if(currentState->getNextState(letter) != nullptr)
@@ -43,6 +44,7 @@ void Jeu::createState(std::string word)
             {
                 etat += letter;
                 currentState =  currentState->ajouter(etat, letter, false);
+
             }
         }
         else{
@@ -54,6 +56,7 @@ void Jeu::createState(std::string word)
             {
                 etat+= letter;
                 currentState->ajouter(etat, letter, true);
+                
             }
         }
         

@@ -9,6 +9,7 @@ class Jeu
 {
 private:
 public:
+
     std::unique_ptr<state> stateStart =std::make_unique<state>(state("", ' ', false));
     std::vector<state*> myTop;
 

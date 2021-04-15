@@ -20,6 +20,7 @@ using namespace std;
 
 Covid t;
 
+
 void MenuJeuInstructif()
 {
 	Jeu monjeu;
@@ -104,6 +105,9 @@ void MenuAlerteCovid()
 
 int main()
 {
+	char test = -61;
+	char test2 = -81;
+	std::cout << test << test2;
 	while (true)
 	{
 		cout << "\n\nAppuyer sur:\n(a): Alerte COVID.\n(b): Jeu Intructif.\n(c): Quitter.\n";

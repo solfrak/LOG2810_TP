@@ -9,6 +9,7 @@ private:
     char transition_;
     
 public:
+    
     std::string etat_;
     int NbRecherches = 0;
     int nbWord = 0;

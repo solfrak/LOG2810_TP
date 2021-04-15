@@ -10,7 +10,7 @@ LDFLAGS := -g -Wall
 INC_DIRS := $(shell find $(SRC_DIRS) -type d)
 INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
-CPPFLAGS ?= $(INC_FLAGS) -g -MMD -MP -Wall
+CPPFLAGS ?= $(INC_FLAGS) -g -MMD -MP -Wall -std=c++17
 
 $(TARGET): $(OBJS)
 	$(CC) $(LDFLAGS) $(OBJS) -o $@ $(LOADLIBES) $(LDLIBS)
