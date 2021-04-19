@@ -18,7 +18,7 @@ using namespace std;
 //  }
 
 
-Covid t;
+
 
 
 void MenuJeuInstructif()
@@ -55,6 +55,7 @@ void MenuJeuInstructif()
 
 void MenuAlerteCovid()
 {	
+	Covid t;
 	bool menuCovid = true;
 	bool hasCreateExposition = false;
 	while(menuCovid){
@@ -82,11 +83,17 @@ void MenuAlerteCovid()
 				cout << "Entrer le nom valide d'un indidu\n";
 				std::string nom;
 				cin >> nom;
-				if(t.NotifierExposition(nom)){
-					cout << "Vous avez ete exposer au cours des 14 derniers jours\n";
+
+				if(t.findIndexIndividu(nom) != -1){
+					if(t.NotifierExposition(nom)){
+						cout << "Vous avez ete exposer au cours des 14 derniers jours\n";
+					}
+					else {
+						cout << "\nAucune exposition detectee\n";
+					}
 				}
-				else {
-					cout << "\nAucune exposition detectee\n";
+				else{
+					cout << "L'individu que vous recherchez ne se trouver pas dans notre base de données. Veuillez réessayer\n";
 				}
 			}
 

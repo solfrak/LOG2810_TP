@@ -22,6 +22,6 @@ public:
     void afficherGrapheExposition();
     void loadGraph();
     bool loadDoc(std::string ind, std::string cont);
-    // void IdentifierExposition();
+    bool IdentifierExposition(std::string);
     bool NotifierExposition(std::string);
 };

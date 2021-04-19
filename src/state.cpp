@@ -18,6 +18,18 @@ void state::print()
     }
 }
 
+void state::printStat()
+{
+    if(this->estFinal_){
+        std::cout << this->getEtat() << "\n\tNombre de fois recherché: " << this->NbRecherches << "\n\tEst dans le top 10: " << this->estTop10 << std::endl << std::endl;
+    }
+    else{
+        for(auto& it : listConnection){
+            it->printStat();
+        }
+    }
+}
+
 std::string state::getEtat(){
     return etat_;
 }

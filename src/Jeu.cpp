@@ -8,6 +8,8 @@ void Jeu::creerAutomate()
     std::cin >> nom;
     std::ifstream lexique;
     lexique.open(nom, std::ios::in);
+    stateStart.get()->listConnection.clear();
+    myTop.clear();
     while (lexique.peek() != EOF)
     {
         std::string line;
@@ -98,10 +100,11 @@ void Jeu::saisirMot(){
 
 void Jeu::afficherStatistique(){
     
-    std::cout << "\nLes 10 mots les plus recherche sont:\n";
-    for(int i =0; i < myTop.size() && i < 10; i++){
-        std::cout << myTop.at(i)->etat_ << std::endl;
-    }
+    // std::cout << "\nLes 10 mots les plus recherche sont:\n";
+    // for(int i =0; i < myTop.size() && i < 10; i++){
+    //     std::cout << myTop.at(i)->etat_ << std::endl;
+    // }
+    stateStart.get()->printStat();
     
 }
 

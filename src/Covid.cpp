@@ -132,8 +132,14 @@ bool Covid::creerGrapheExposition()
 }
 
 bool Covid::NotifierExposition(std::string nom){
-  
+    return IdentifierExposition(nom);
+}
+
+bool Covid::IdentifierExposition(std::string nom){
+    //partie Dijkstra
     d.foundDistance(graph.size(), findIndexIndividu(nom), graph);
+
+    //Critère d'exposition
 	for (int i = 0; i < d.myDistance.size(); i++)
 	{
 		if (d.myDistance[i] <= 2 && getIndividus(i)->getIsInfected())
