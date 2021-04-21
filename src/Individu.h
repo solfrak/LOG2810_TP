@@ -1,6 +1,11 @@
 #pragma once
 #include <string>
 #include <vector>
+
+/**
+ * @brief Classe qui enregistre les individus et leur status
+ * 
+ */
 class Individu
 {
 private:

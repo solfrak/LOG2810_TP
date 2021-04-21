@@ -2,6 +2,14 @@
 #include <iostream>
 #include <fstream>
 
+/**
+ * @brief Methode qui charge un vecteur de contact et d'individu a partir de fichier .txt
+ *        et fait appel à la mthode loadGraph() pour construire le grpahe
+ * @param ind Le nom du fichier contenant la liste d'indvidu
+ * @param cont Le nom du fichier contenant la liste de contacte ainsi que la distance
+ * @return true  
+ * @return false 
+ */
 bool Covid::loadDoc(std::string ind, std::string cont)
 {
     std::ifstream myfileIndividu;
@@ -44,17 +52,32 @@ bool Covid::loadDoc(std::string ind, std::string cont)
     loadGraph();
     return true;
 }
-
+/**
+ * @brief permet d'avoir le pointeur d'un individu present à un index particulier
+ * 
+ * @param index index du vecteur d'individu
+ * @return Individu* 
+ */
 Individu *Covid::getIndividus(int index)
 {
     return this->individus.at(index).get();
 }
 
+/**
+ * @brief permet d'avoir le pointeur d'un contact present à un index particulier
+ * 
+ * @param index index du vecteur de contact
+ * @return Contact* 
+ */
 Contact *Covid::getContact(int index)
 {
     return this->contacts.at(index).get();
 }
 
+/**
+ * @brief affiche la liste de contact
+ * 
+ */
 void Covid::afficherGrapheExposition()
 {
     for (auto &it : contacts)
@@ -63,6 +86,10 @@ void Covid::afficherGrapheExposition()
     }
 }
 
+/**
+ * @brief décharge puis charge le graphe avec le vecteur de contacts 
+ * 
+ */
 void Covid::loadGraph()
 {
     graph.resize(individus.size());
@@ -86,6 +113,12 @@ void Covid::loadGraph()
     }
 }
 
+/**
+ * @brief Cherche un individu par son nom et le retourne s'il existe, sinon retourne null
+ * 
+ * @param name Le nom de l'individu recherché
+ * @return Individu* 
+ */
 Individu *Covid::findIndividu(std::string name)
 {
     for (auto& it : individus)
@@ -98,6 +131,12 @@ Individu *Covid::findIndividu(std::string name)
     return nullptr;
 }
 
+/**
+ * @brief 
+ * 
+ * @param name 
+ * @return int 
+ */
 int Covid::findIndexIndividu(std::string name)
 {
     for (int i = 0; i < individus.size(); i++)

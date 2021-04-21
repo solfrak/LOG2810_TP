@@ -1,6 +1,11 @@
 #pragma once
 #include <string>
 #include "Individu.h"
+
+/**
+ * @brief Classe qui enregistre les contactes entre les personnes
+ * 
+ */
 class Contact
 {
 private:

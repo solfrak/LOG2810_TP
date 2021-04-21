@@ -1,5 +1,13 @@
 #include "Dijkstra.h"
 #define INFINITY 9999
+
+/**
+ * @brief 
+ * 
+ * @param n 
+ * @param startnode Le noeud par lequel l'algorithme commance
+ * @param G 
+ */
 void Dijkstra::foundDistance(int n, int startnode, vector<vector<double>> G){
     double cost[n][n];
 	double distance[n];

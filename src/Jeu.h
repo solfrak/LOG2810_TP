@@ -4,7 +4,10 @@
 #include <vector>
 #include <fstream>
 
-
+/**
+ * @brief Classe cree et gere les automates du jeu 
+ * 
+ */
 class Jeu
 {
 private:

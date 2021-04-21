@@ -1,6 +1,11 @@
 #include "Jeu.h"
 #include <cstring>
 #include <algorithm>
+
+/**
+ * @brief Cree les automates a partir d'un lexique
+ * 
+ */
 void Jeu::creerAutomate()
 {
     std::cout << "Entrer le nom du lexique\n";
@@ -20,7 +25,11 @@ void Jeu::creerAutomate()
     stateStart.get()->updateNbWord();
 }
 
-
+/**
+ * @brief Cree les etats de l'automate
+ * 
+ * @param word Mot dont les etats doivent etre cree
+ */
 void Jeu::createState(std::string word)
 {
     char letter;
@@ -64,6 +73,7 @@ void Jeu::createState(std::string word)
         
     }
 }
+
 
 void Jeu::saisirMot(){
     bool motTrouv = false;
