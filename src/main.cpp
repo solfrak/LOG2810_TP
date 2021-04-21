@@ -4,44 +4,34 @@
 #include "Covid.h"
 #include <vector>
 #include "Jeu.h"
-#define INFINITY 9999
+
 using namespace std;
 
-//  void CreerGraphe(){
-// 	 t.creerGrapheExposition;
-//  }
-//  void AfficherGraphe(){
-// 	 t.afficherGrapheExposition;
-//  }
-//  AfficherNotification(){
-// 	 t.
-//  }
-
-
-
-
-
+/**
+ * @brief Le menu pour le jeu instructif
+ * 
+ */
 void MenuJeuInstructif()
 {
 	Jeu monjeu;
 	bool menuJeu = true;
 	while(menuJeu){
 		char option;
-		cout << "\n\n(a) Creer Automate.\n" << "(b) Saisir mot.\n" << "(c) Afficher statistique\n" << "(d) Quitter.\n";
+		cout << "\n\n(d) Creer Automate.\n" << "(e) Saisir mot.\n" << "(f) Afficher statistique\n" << "(g) Quitter.\n";
 		cin >> option;
 		switch(option){
-		case 'a':
+		case 'd':
 			monjeu.creerAutomate();
 			break;
 
-		case 'b':
+		case 'e':
 			monjeu.saisirMot();
 			break;
 			
-		case 'c':
+		case 'f':
 			monjeu.afficherStatistique();
 			break;
-		case 'd':
+		case 'g':
 			menuJeu = false;
 			break;
 		
@@ -52,7 +42,10 @@ void MenuJeuInstructif()
 	}
 }
 
-
+/**
+ * @brief Le menu pour Alerte Covid
+ * 
+ */
 void MenuAlerteCovid()
 {	
 	Covid t;
@@ -85,12 +78,7 @@ void MenuAlerteCovid()
 				cin >> nom;
 
 				if(t.findIndexIndividu(nom) != -1){
-					if(t.NotifierExposition(nom)){
-						cout << "Vous avez ete exposer au cours des 14 derniers jours\n";
-					}
-					else {
-						cout << "\nAucune exposition detectee\n";
-					}
+					t.NotifierExposition(nom);
 				}
 				else{
 					cout << "L'individu que vous recherchez ne se trouver pas dans notre base de données. Veuillez réessayer\n";
@@ -110,6 +98,11 @@ void MenuAlerteCovid()
 	}
 }
 
+/**
+ * @brief Le menu principal du programme
+ * 
+ * @return int Le statut de l'execution du programme
+ */
 int main()
 {
 	char test = -61;

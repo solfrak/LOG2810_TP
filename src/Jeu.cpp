@@ -13,8 +13,13 @@ void Jeu::creerAutomate()
     std::cin >> nom;
     std::ifstream lexique;
     lexique.open(nom, std::ios::in);
+
+    if(!lexique.is_open()){
+        std::cout << "Une erreur est survenue dans la lecture du fichier. Veuillez réessayer.\n";
+        return;
+    }
     stateStart.get()->listConnection.clear();
-    myTop.clear();
+    ListMotRecherche.clear();
     while (lexique.peek() != EOF)
     {
         std::string line;
@@ -23,6 +28,7 @@ void Jeu::creerAutomate()
     }
 
     stateStart.get()->updateNbWord();
+    std::cout << "Le fichier a bien été lu\n";
 }
 
 /**
@@ -35,26 +41,20 @@ void Jeu::createState(std::string word)
     char letter;
     state* currentState = stateStart.get();
     std::string etat = "";
-    for (int i = 0; i < word.length(); i++)
+    for (size_t i = 0; i < word.length(); i++)
     {
         letter = word[i];
-        // if(letter < 0){
-        //     i++;
-        //     letter = word[i];
-        // }
         if(i != word.length()-1)
         {
             if(currentState->getNextState(letter) != nullptr)
             {
                 etat+=letter;
                 currentState = currentState->getNextState(letter);
-               // currentState = **currentState.getNextState(letter);
-                
             }
             else
             {
                 etat += letter;
-                currentState =  currentState->ajouter(etat, letter, false);
+                currentState =  currentState->ajouter(letter, etat, false);
 
             }
         }
@@ -66,7 +66,7 @@ void Jeu::createState(std::string word)
             else
             {
                 etat+= letter;
-                currentState->ajouter(etat, letter, true);
+                currentState->ajouter(letter, etat, true);
                 
             }
         }
@@ -74,7 +74,10 @@ void Jeu::createState(std::string word)
     }
 }
 
-
+/**
+ * @brief Methode affichant les prochains mot selon l'entree
+ * 
+ */
 void Jeu::saisirMot(){
     bool motTrouv = false;
     state* currentState = stateStart.get();
@@ -88,7 +91,7 @@ void Jeu::saisirMot(){
         
 
         if(currentState->nbWord == 1){
-            std::cout << "Le mot que vous chercez est: ";
+            std::cout << "Le mot que vous cherchez est: ";
             currentState->print();
             motTrouv = true;
             
@@ -96,7 +99,7 @@ void Jeu::saisirMot(){
                 currentState = currentState->listConnection.at(0).get();
             }
             currentState->increment();
-            ajouteTop(currentState);
+            AjouterMotListe(currentState);
             updateTop();
             
             
@@ -107,36 +110,48 @@ void Jeu::saisirMot(){
     }
 }
 
-
+/**
+ * @brief affiche le top 10 des mots les plus utilisé
+ * 
+ */
 void Jeu::afficherStatistique(){
-    
-    // std::cout << "\nLes 10 mots les plus recherche sont:\n";
-    // for(int i =0; i < myTop.size() && i < 10; i++){
-    //     std::cout << myTop.at(i)->etat_ << std::endl;
-    // }
     stateStart.get()->printStat();
-    
+
+    std::cout << "Les 10 mots les plus recherché sont:\n";
+    for(int i =0; i < 10; i++){
+        std::cout << ListMotRecherche[i]->etat_ << std::endl;
+    }
 }
 
-void Jeu::ajouteTop(state* s){
-    for(auto& it : myTop){
+/**
+ * @brief Ajoute le mot rechercher par l'utilisateur dans la liste
+ * 
+ * @param s l'etat finale utilisé
+ */
+void Jeu::AjouterMotListe(state* s){
+    for(auto& it : ListMotRecherche){
         if(it->etat_ == s->etat_){
             return;
         }
     }
-    myTop.push_back(s);
+    ListMotRecherche.push_back(s);
 }
 
+/**
+ * @brief trie la liste par le nombre de fois qu'un mot a été cherché 
+ *        et affecte true si l'index se situe dans le top 10
+ * 
+ */
 void Jeu::updateTop(){
-    std::sort(myTop.begin(), myTop.end(), [](const auto* o1, const auto o2){
+    std::sort(ListMotRecherche.begin(), ListMotRecherche.end(), [](const auto* o1, const auto o2){
         return o1->NbRecherches > o2->NbRecherches;
     });
-    for(int i =0; i < myTop.size(); i++){
+    for(size_t i =0; i < ListMotRecherche.size(); i++){
         if(i < 10){
-            myTop.at(i)->estTop10 = true;
+            ListMotRecherche.at(i)->estTop10 = true;
         }
         else{
-            myTop.at(i)->estTop10 = false;
+            ListMotRecherche.at(i)->estTop10 = false;
         }
     }
 

@@ -4,7 +4,7 @@
 using namespace std;
 
 /**
- * @brief Classe de l'algorithm de dijkstra
+ * @brief Classe de l'algorithme de dijkstra
  * 
  */
 class Dijkstra

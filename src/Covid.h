@@ -5,6 +5,10 @@
 #include <memory>
 #include "Dijkstra.h"
 
+/**
+ * @brief Classe qui gere les graphes de Covid
+ * 
+ */
 class Covid
 {
 private:
@@ -23,5 +27,5 @@ public:
     void loadGraph();
     bool loadDoc(std::string ind, std::string cont);
     bool IdentifierExposition(std::string);
-    bool NotifierExposition(std::string);
+    void NotifierExposition(std::string);
 };

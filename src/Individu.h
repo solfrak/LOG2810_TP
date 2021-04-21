@@ -9,11 +9,12 @@
 class Individu
 {
 private:
-    bool isInfected_;
     std::string name_;
+    bool isInfected_;
     int id_;
 public:
     Individu(std::string, bool, int);
+    
     std::string getName(){
         return name_;
     }

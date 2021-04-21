@@ -7,8 +7,8 @@
  *        et fait appel à la mthode loadGraph() pour construire le grpahe
  * @param ind Le nom du fichier contenant la liste d'indvidu
  * @param cont Le nom du fichier contenant la liste de contacte ainsi que la distance
- * @return true  
- * @return false 
+ * @return True si reussi  
+ * @return False sinon
  */
 bool Covid::loadDoc(std::string ind, std::string cont)
 {
@@ -53,9 +53,9 @@ bool Covid::loadDoc(std::string ind, std::string cont)
     return true;
 }
 /**
- * @brief permet d'avoir le pointeur d'un individu present à un index particulier
+ * @brief Permet d'avoir le pointeur d'un individu present à un index particulier
  * 
- * @param index index du vecteur d'individu
+ * @param index Index du vecteur d'individu
  * @return Individu* 
  */
 Individu *Covid::getIndividus(int index)
@@ -64,9 +64,9 @@ Individu *Covid::getIndividus(int index)
 }
 
 /**
- * @brief permet d'avoir le pointeur d'un contact present à un index particulier
+ * @brief Permet d'avoir le pointeur d'un contact present à un index particulier
  * 
- * @param index index du vecteur de contact
+ * @param index Index du vecteur de contact
  * @return Contact* 
  */
 Contact *Covid::getContact(int index)
@@ -75,7 +75,7 @@ Contact *Covid::getContact(int index)
 }
 
 /**
- * @brief affiche la liste de contact
+ * @brief Affiche la liste de contact
  * 
  */
 void Covid::afficherGrapheExposition()
@@ -87,7 +87,7 @@ void Covid::afficherGrapheExposition()
 }
 
 /**
- * @brief décharge puis charge le graphe avec le vecteur de contacts 
+ * @brief Décharge puis charge le graphe avec le vecteur de contacts 
  * 
  */
 void Covid::loadGraph()
@@ -98,9 +98,9 @@ void Covid::loadGraph()
         it.resize(individus.size());
     }
     //std::cout << graph.size() << '\n' << graph[0].size();
-    for (int i = 0; i < individus.size(); i++)
+    for (size_t i = 0; i < individus.size(); i++)
     {
-        for (int j = 0; j < individus.size(); j++)
+        for (size_t j = 0; j < individus.size(); j++)
         {
             graph[i][j] = 0;
         }
@@ -132,14 +132,14 @@ Individu *Covid::findIndividu(std::string name)
 }
 
 /**
- * @brief 
+ * @brief Trouve l'index d'une personne a partir de son nom
  * 
- * @param name 
- * @return int 
+ * @param name Nom de la personne dont l'on veut l'index
+ * @return int L'index de la personne
  */
 int Covid::findIndexIndividu(std::string name)
 {
-    for (int i = 0; i < individus.size(); i++)
+    for (size_t i = 0; i < individus.size(); i++)
     {
         if (getIndividus(i)->getName() == name)
         {
@@ -149,6 +149,12 @@ int Covid::findIndexIndividu(std::string name)
     return -1;
 }
 
+ /**
+  * @brief Lit les fichiers
+  * 
+  * @return True si les fichiers ont pu etre lu
+  * @return False sinon
+  */
 bool Covid::creerGrapheExposition()
 {
     std::cout << "\nEntrez le nom du fichier d'individus\n";
@@ -170,16 +176,36 @@ bool Covid::creerGrapheExposition()
     }
 }
 
-bool Covid::NotifierExposition(std::string nom){
-    return IdentifierExposition(nom);
+
+/**
+ * @brief Verifie si une personne a été à moins de deux mètres d'un individu atteint
+ * 
+ * @param nom Nom de la personne dont l'on veut determiner l'exposition
+ * @return True si une exposition est detecte
+ * @return False sinon
+ */
+void Covid::NotifierExposition(std::string nom){
+    
+    if(IdentifierExposition(nom)) {
+			cout << "Vous avez ete exposer au cours des 14 derniers jours\n";
+	}
+	else {
+		cout << "\nAucune exposition detectee\n";
+	}
 }
 
+/**
+ * 
+ * @brief Determine si une personne a ete expose 
+ * 
+ * @param nom Le nom de la personne dont l'on veut determiner l'exposition
+ * @return True return true si la personne a ete en contact a moins de 2 metres d'un infecté
+ * @return False sinon
+ */
 bool Covid::IdentifierExposition(std::string nom){
-    //partie Dijkstra
     d.foundDistance(graph.size(), findIndexIndividu(nom), graph);
 
-    //Critère d'exposition
-	for (int i = 0; i < d.myDistance.size(); i++)
+	for (size_t i = 0; i < d.myDistance.size(); i++)
 	{
 		if (d.myDistance[i] <= 2 && getIndividus(i)->getIsInfected())
 		{

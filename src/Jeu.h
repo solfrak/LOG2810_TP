@@ -13,8 +13,8 @@ class Jeu
 private:
 public:
 
-    std::unique_ptr<state> stateStart =std::make_unique<state>(state("", ' ', false));
-    std::vector<state*> myTop;
+    std::unique_ptr<state> stateStart =std::make_unique<state>(state(' ', " ", false));
+    std::vector<state*> ListMotRecherche;
 
     void creerAutomate();
     void createState(std::string);
@@ -23,7 +23,7 @@ public:
 
     void afficherStatistique();
 
-    void ajouteTop(state*);
+    void AjouterMotListe(state*);
     void updateTop();
 
 };

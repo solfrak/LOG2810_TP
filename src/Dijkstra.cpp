@@ -1,24 +1,27 @@
 #include "Dijkstra.h"
+#ifndef INFINTIY
 #define INFINITY 9999
+#endif
 
 /**
- * @brief 
+ * @brief Algorithme de Dijkstra
  * 
- * @param n 
- * @param startnode Le noeud par lequel l'algorithme commance
- * @param G 
+ * @param n Taille du vecteur (nombre d'individu)
+ * @param startnode La personne par lequel l'algorithme commence
+ * @param G Le vecteur contenant les personnes
  */
 void Dijkstra::foundDistance(int n, int startnode, vector<vector<double>> G){
     double cost[n][n];
 	double distance[n];
-	int pred[n];
+	
 	int visited[n],count;
 	double mindistance;
 	int nextnode,i,j;
 	
-	//pred[] stores the predecessor of each node
-	//count gives the number of nodes seen so far
-	//create the cost matrix
+	/**	
+	* Remplie la matrice de cout à partir du graph. Si la distance est 0, Cela veut dire qu'il n'y a pas de connection
+	* donc la distance est INFINITY
+	*/
 	for(i=0;i<n;i++)
 		for(j=0;j<n;j++)
 			if(G[i][j]==0)
@@ -26,11 +29,13 @@ void Dijkstra::foundDistance(int n, int startnode, vector<vector<double>> G){
 			else
 				cost[i][j]=G[i][j];
 	
-	//initialize pred[],distance[] and visited[]
+	/**
+	 * Remplie le tableau de distance à partir du point de départ
+	 * dans le graphe
+	 */
 	for(i=0;i<n;i++)
 	{
 		distance[i]=cost[startnode][i];
-		pred[i]=startnode;
 		visited[i]=0;
 	}
 	
@@ -38,27 +43,29 @@ void Dijkstra::foundDistance(int n, int startnode, vector<vector<double>> G){
 	visited[startnode]=1;
 	count=1;
 	
+	
 	while(count<n-1)
 	{
 		mindistance=INFINITY;
 		
-		//nextnode gives the node at minimum distance
-		for(i=0;i<n;i++)
+		//Trouve le noeud ayant la distance minimal
+		for(i=0;i<n;i++){
 			if(distance[i]<mindistance&&!visited[i])
 			{
 				mindistance=distance[i];
 				nextnode=i;
 			}
-			
-			//check if a better path exists through nextnode			
-			visited[nextnode]=1;
-			for(i=0;i<n;i++)
-				if(!visited[i])
-					if(mindistance+cost[nextnode][i]<distance[i])
-					{
-						distance[i]=mindistance+cost[nextnode][i];
-						pred[i]=nextnode;
-					}
+		}
+				
+		// Regarde si un meilleur chemin existe	à partir des noeuds déjà visité
+		visited[nextnode]=1;
+		for(i=0;i<n;i++){
+			if(!visited[i])
+				if(mindistance+cost[nextnode][i]<distance[i])
+				{
+					distance[i]=mindistance+cost[nextnode][i];
+				}
+		}
 		count++;
 	}
 	for(int i=0; i < n; i++){
